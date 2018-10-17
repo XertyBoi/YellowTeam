@@ -10,7 +10,12 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_10_17_090007) do
+ActiveRecord::Schema.define(version: 2018_10_17_122038) do
+
+  create_table "boards", force: :cascade do |t|
+    t.integer "game_id"
+    t.integer "position_id"
+  end
 
   create_table "games", force: :cascade do |t|
     t.string "name"
