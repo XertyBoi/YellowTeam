@@ -1,6 +1,28 @@
 <h1>Game: <%=@game.name%></h1>
 <h2>ID: <%=@game.id%><h2>
 
+
+<p>Current Tile: <%= @board.position_id %></p>
+
+<% (100).downto(0) { |current_tile| %>
+     <% if current_tile%10 != 0 %>
+      <% if @board.position_id == current_tile %>
+        [0]
+      <% else %>
+        [ ]
+      <% end %>
+    <% else %>
+      <% if @board.position_id == current_tile %>
+        [0]
+        <br>
+      <% else %>
+        [ ]
+        <br>
+      <% end %>
+    <% end %>
+<% } %>
+
+
 <p>Rolled number: <%= @last_roll %></p>
 
 <%= @dice %>

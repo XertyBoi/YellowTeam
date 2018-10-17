@@ -13,6 +13,10 @@ class GamesController < ApplicationController
     @last_roll = Dice.new.roll
     @game = Game.find(params[:game_id])
     @board = Board.find(@game.board.id)
+
+    @board.position_id += @last_roll
+    @board.save
+
     render :show
   end
 
@@ -22,7 +26,7 @@ class GamesController < ApplicationController
 
   def create
     @game = Game.create(game_params)
-    @board = Board.create(game_id: @game.id)
+    @board = Board.create(game_id: @game.id, position_id: 0)
 
     respond_to do |format|
       if @game.save
