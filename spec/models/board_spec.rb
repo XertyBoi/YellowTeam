@@ -1,8 +1,6 @@
 require 'rails_helper'
 
 RSpec.describe Board, type: :model do
-
-
   it "to show that we can grab a board using the game's id" do
 
     @game = Game.new(id: 2, name: "test_game")
@@ -10,5 +8,4 @@ RSpec.describe Board, type: :model do
 
     expect(@board.game_id).to eq(@game.id)
   end
-
 end
