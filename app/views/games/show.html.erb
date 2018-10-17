@@ -1,0 +1,8 @@
+<h1>Game: <%=@game.name%></h1>
+<h2>ID: <%=@game.id%><h2>
+
+<p>Rolled number: <%= @last_roll %></p>
+
+<%= @dice %>
+
+<%= button_to "Roll", game_update_roll_path(@game), method: :get %>
