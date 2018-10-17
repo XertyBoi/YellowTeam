@@ -12,7 +12,7 @@ class GamesController < ApplicationController
   def update_roll
     @last_roll = Dice.new.roll
     @game = Game.find(params[:game_id])
-    @board = Board.find(@game.id)
+    @board = Board.find(@game.board.id)
     render :show
   end
 
@@ -21,8 +21,8 @@ class GamesController < ApplicationController
   end
 
   def create
-    @game = Game.new(test_params)
-    @board = Board.new(game_id: @game.id)
+    @game = Game.create(game_params)
+    @board = Board.create(game_id: @game.id)
 
     respond_to do |format|
       if @game.save
@@ -35,8 +35,12 @@ class GamesController < ApplicationController
     end
   end
 
+  def game_params
+    params.require(:game).permit(:name)
+  end
+
   def set_list
     @game = Game.find(params[:id])
-    @board = Board.find(@game.id)
+    @board = Board.find(@game.board.id)
   end
 end
