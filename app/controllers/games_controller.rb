@@ -13,11 +13,13 @@ class GamesController < ApplicationController
     @last_roll = Dice.new.roll
     @game = Game.find(params[:game_id])
     @board = @game.board
-
     @board.position_id += @last_roll
     @board.save
-
-    render :show
+    if @board.position_id >= 100
+      end_game
+    else
+     render :show
+    end
   end
 
   def new
@@ -47,4 +49,11 @@ class GamesController < ApplicationController
     @game = Game.find(params[:id])
     @board = @game.board
   end
+
+private
+
+  def end_game
+    render :complete
+  end  
 end
+

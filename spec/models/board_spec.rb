@@ -8,4 +8,5 @@ RSpec.describe Board, type: :model do
 
     expect(@board.game_id).to eq(@game.id)
   end
+
 end
