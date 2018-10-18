@@ -1,0 +1,2 @@
+class PositiveTile < Tile
+end
