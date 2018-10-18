@@ -6,8 +6,12 @@ class Tile
     @id = id
   end
 
-  def draw
-    "[ ]"
+  def draw(position_id)
+    if id == position_id
+      "[0]"
+    else
+      "[ ]"
+    end
   end
 
   def perform
