@@ -12,7 +12,7 @@ class GamesController < ApplicationController
   def update_roll
     @last_roll = Dice.new.roll
     @game = Game.find(params[:game_id])
-    @board = Board.find(@game.board.id)
+    @board = @game.board
 
     @board.position_id += @last_roll
     @board.save
@@ -45,6 +45,6 @@ class GamesController < ApplicationController
 
   def set_list
     @game = Game.find(params[:id])
-    @board = Board.find(@game.board.id)
+    @board = @game.board
   end
 end

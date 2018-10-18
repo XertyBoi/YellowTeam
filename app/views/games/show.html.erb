@@ -4,7 +4,7 @@
 
 <p>Current Tile: <%= @board.position_id %></p>
 
-<% (100).downto(0) { |current_tile| %>
+<% (99).downto(0) { |current_tile| %>
      <% if current_tile%10 != 0 %>
       <% if @board.position_id == current_tile %>
         [0]
