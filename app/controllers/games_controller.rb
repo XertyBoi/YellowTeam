@@ -50,10 +50,16 @@ class GamesController < ApplicationController
     @board = @game.board
   end
 
+  def delete
+    @game.destroy
+    @board.destroy
+  end
+
 private
 
   def end_game
     render :complete
+    delete
   end  
 end
 
