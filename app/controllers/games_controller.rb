@@ -1,11 +1,12 @@
 class GamesController < ApplicationController
-  before_action :set_list, only: [:show]
+  before_action :set_vars, only: [:show]
 
   def index
     @games = Game.all
   end
 
   def show
+    @game = Game.find(params[:id])
     @last_roll = 0
   end
 
@@ -13,6 +14,8 @@ class GamesController < ApplicationController
     @last_roll = Dice.new.roll
     @game = Game.find(params[:game_id])
     @board = @game.board
+    @tile_set = @board.get_tile_set
+
     @board.position_id += @last_roll
     @board.save
     if @board.position_id >= 100
@@ -28,7 +31,7 @@ class GamesController < ApplicationController
 
   def create
     @game = Game.create(game_params)
-    @board = Board.create(game_id: @game.id, position_id: 0)
+    @board = Board.create(game_id: @game.id, position_id: 0, tile_set: "default")
 
     respond_to do |format|
       if @game.save
@@ -45,9 +48,10 @@ class GamesController < ApplicationController
     params.require(:game).permit(:name)
   end
 
-  def set_list
+  def set_vars
     @game = Game.find(params[:id])
     @board = @game.board
+    @tile_set = @board.get_tile_set
   end
 
   def delete
@@ -60,6 +64,5 @@ private
   def end_game
     render :complete
     delete
-  end  
+  end
 end
-

@@ -1,7 +1,5 @@
-class Board < ApplicationRecord
-  belongs_to :game
-
-  def get_tile_set
+class Tiles < ApplicationRecord
+  def test
     tiles = []
 
     Tiles.all.each do |t|
@@ -10,5 +8,4 @@ class Board < ApplicationRecord
 
     tiles
   end
-
 end

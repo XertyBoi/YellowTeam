@@ -17,9 +17,24 @@ RSpec.describe GamesController, type: :controller do
     expect(subject.class).to eq(Game)
   end
 
-=begin   it "expects update roll to render template show " do
-   	get :update_roll, :game_id => 1.to_s
-    expect(response).to render_template("show")
-  end=end
+  # it "expects update roll to render template show " do
+  #   @game = Game.create(name: "test")
+  #   @board = Board.create(game_id: @game.id)
+  #
+  #  	get :update_roll, params: { game_id: @game.id }
+  #
+  #   allow(@game).to receive(:board).and_return(@board)
+  #
+  #   expect(response).to render_template("show")
+  #
+  #   @game.destroy
+  #   @board.destroy
+  # end
+
+
+  # it "" do
+  #   allow(obj).to receive(:message).with('an argument') { ... }
+  #   obj.stub(:message).with('an argument') { ... }
+  # end
 
 end
