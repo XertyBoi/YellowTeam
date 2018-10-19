@@ -3,11 +3,18 @@
 #
 # Examples:
 #
-
+  
 
   99.downto(0) do |n|
-    Tiles.create(id: n, tile_type: "none")
+  	if n%10 == 0
+  	  Tiles.create(id: n, tile_type: "positive")
+  	elsif n%7 == 0
+  	  Tiles.create(id: n, tile_type: "negative")
+  	else  		  	
+      Tiles.create(id: n, tile_type: "none")
+    end
   end
+
 
 #movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #Character.create(name: 'Luke', movie: movies.first)

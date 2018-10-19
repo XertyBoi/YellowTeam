@@ -10,9 +10,9 @@ class Board < ApplicationRecord
       when "none"
         tiles << Tile.new(t.id)
       when "positive"
-        tiles << PositiveTile.new(t.id)
+        tiles << Tile::PositiveTile.new(t.id)
       when "negative"
-        tiles << NegativeTile.new(t.id)
+        tiles << Tile::NegativeTile.new(t.id)
       else
         tiles << Tile.new(t.id)
       end
