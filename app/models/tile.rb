@@ -2,8 +2,9 @@ class Tile
 
   attr_reader :id
 
-  def initialize(id)
+  def initialize(id, board)
     @id = id
+    @board = board
   end
 
   def draw(position_id)

@@ -8,13 +8,13 @@ class Board < ApplicationRecord
 
       case t.tile_type
       when "none"
-        tiles << Tile.new(t.id)
+        tiles << Tile.new(t.id, self)
       when "positive"
-        tiles << Tile::PositiveTile.new(t.id)
+        tiles << Tile::PositiveTile.new(t.id, self)
       when "negative"
-        tiles << Tile::NegativeTile.new(t.id)
+        tiles << Tile::NegativeTile.new(t.id, self)
       else
-        tiles << Tile.new(t.id)
+        tiles << Tile.new(t.id, self)
       end
     end
 
