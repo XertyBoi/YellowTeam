@@ -5,7 +5,7 @@
 <p>Current Tile: <%= @board.position_id %></p>
 
 <% @tile_set.reverse.each { |current_tile| %>
-     <%= current_tile.draw @board.position_id %>
+     <%= current_tile.draw %>
 <% } %>
 
 

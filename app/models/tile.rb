@@ -7,8 +7,9 @@ class Tile
     @board = board
   end
 
-  def draw(position_id)
-    if id == position_id
+  def draw
+    if id == @board.position_id
+      perform
       "[0]"
     else
       "[ ]"

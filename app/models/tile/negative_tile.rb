@@ -4,8 +4,8 @@ class Tile
       super
     end
 
-    def draw(position_id)
-      if id == position_id
+    def draw
+      if id == @board.position_id
         "(0)"
       else
         "( )"
