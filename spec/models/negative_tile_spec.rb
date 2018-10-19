@@ -2,19 +2,30 @@ require 'rails_helper'
 
 RSpec.describe Tile::NegativeTile, type: :model do
 
+  before :each do
+    @board = Board.new(id: 1, game_id: 1, position_id: 1, tile_set: 'default')
+    @tile = Tile::NegativeTile.new(1 , @board )
+  end
+
   it "tests we can create an instance of Negative Tile" do
-    tile = Tile::NegativeTile.new 1
-    expect(tile.class).to eq(Tile::NegativeTile)
+    expect(@tile.class).to eq(Tile::NegativeTile)
   end
 
   it "tests we can call perform method on Negative Tile" do
-    tile = Tile::NegativeTile.new 1
-    expect(tile.perform).to eq(true)
+    expect(@tile.perform).to eq(true)
   end
 
-  it "tests draw method returns output different then normal" do
-    tile = Tile::NegativeTile.new 1
-    expect(tile.draw 2).to eq('( )')
+  it "returns an empty tile" do
+    @board.position_id = 2
+    expect(@tile.draw).to eq('( )')
   end
 
+  it "returns a tile with a counter on it" do
+    expect(@tile.draw).to eq('(0)')
+  end
+
+  it "perform method decreases board position id" do
+    @tile.perform
+    expect(@board.position_id).to be < 1
+  end
 end

@@ -17,8 +17,6 @@ class Board < ApplicationRecord
         tiles << Tile.new(t.id, self)
       end
     end
-
     tiles
   end
-
 end

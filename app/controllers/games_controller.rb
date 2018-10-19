@@ -18,6 +18,7 @@ class GamesController < ApplicationController
 
     @board.position_id += @last_roll
     @board.save
+    @tile_set[@board.position_id].perform
     if @board.position_id >= 100
       end_game
     else
