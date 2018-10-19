@@ -1,5 +1,5 @@
 class GamesController < ApplicationController
-  before_action :set_vars, only: [:show,:destroy]
+  before_action :set_vars, only: [:show,:destroy,:update]
 
   def index
     @games = Game.all
@@ -50,6 +50,14 @@ class GamesController < ApplicationController
         format.html { redirect_to :new }
         format.json { render json: @game.errors, status: :unprocessable_entity }
       end
+    end
+  end
+
+  def update
+    @board.update(position_id: 0)
+    respond_to do |format|
+      format.html { redirect_to games_url, notice: 'Game was successfully reset.' }
+      format.json { head :no_content }
     end
   end
 

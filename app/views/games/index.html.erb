@@ -5,8 +5,8 @@
     <li>
       <%= game.name%> |
       <%= link_to "Join", game_path(game.id)%> |
-      <%= link_to "Reset" %> |
-      <%= link_to 'Delete', game, method: :delete, data: { confirm: 'Are you sure you want to remove this game?' } %>
+      <%= link_to "Reset" ,game, method: :patch, data: { confirm: 'Are you sure you want to reset this game?' } %> |
+      <%= link_to 'Delete',game, method: :delete, data: { confirm: 'Are you sure you want to remove this game?' } %>
     </li>
   <% end %>
 </ul>
