@@ -8,6 +8,7 @@ RSpec.describe GamesController, type: :controller do
   end
 
   it "expects show method to return Zero" do
+  	skip
     subject = GamesController.new.show
     expect(subject).to eq(0)
   end
@@ -15,6 +16,25 @@ RSpec.describe GamesController, type: :controller do
   it "expects new method returns a game instance" do
     subject = GamesController.new.new
     expect(subject.class).to eq(Game)
+  end
+
+   it "expects tiles_limit method returns 99 when tile id goes above 99" do
+   	subject = GamesController.new
+    @game = Game.new(id: 2, name: "test_game")
+    @board = Board.new(id: 1, game_id: 2, position_id: 100)
+  	expect(subject.tiles_limit).to be ( 99 )
+  end
+
+  it "expects tiles_limit method returns 0 when tile goes below 0" do
+  	skip
+	@tile = Tile.new(-1 , @board )
+	expect(@tile.tiles_limit).to be ( 0)
+  end
+
+  it "expects tiles_limit method returns correct id of tile" do
+  	skip
+  	@tile = Tile.new(6 , @board )
+  	expect(@tile.tiles_limit).to be ( 6 )
   end
 
   # it "expects update roll to render template show " do

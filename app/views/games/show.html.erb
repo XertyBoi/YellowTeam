@@ -1,5 +1,6 @@
 <h1>Game: <%=@game.name%></h1>
 <h2>ID: <%=@game.id%></h2>
+<%=@board.position_id%>
 
 <ul class="board">
   <% @tile_set.reverse.each do |current_tile| %>

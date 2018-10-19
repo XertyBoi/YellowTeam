@@ -17,14 +17,25 @@ class GamesController < ApplicationController
     @tile_set = @board.get_tile_set
 
     @board.position_id += @last_roll
+    tiles_limit
     @board.save
     @tile_set[@board.position_id].perform
-    if @board.position_id >= 100
+    if @board.position_id >= 99
       end_game
     else
      render :show
     end
   end
+
+  def tiles_limit
+    if @board.position_id > 99
+      @board.position_id = 99
+    elsif @board.position_id < 0
+      @board.position_id = 0 
+    else
+      @board.position_id
+    end
+  end 
 
   def new
     @game = Game.new
