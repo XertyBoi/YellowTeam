@@ -1,5 +1,5 @@
 class GamesController < ApplicationController
-  before_action :set_vars, only: [:show]
+  before_action :set_vars, only: [:show,:destroy,:update]
 
   def index
     @games = Game.all
@@ -41,6 +41,14 @@ class GamesController < ApplicationController
     @game = Game.new
   end
 
+  def destroy
+    delete
+    respond_to do |format|
+      format.html { redirect_to games_url, notice: 'Game was successfully removed.' }
+      format.json { head :no_content }
+    end
+  end
+
   def create
     @game = Game.create(game_params)
     @board = Board.create(game_id: @game.id, position_id: 0, tile_set: "default")
@@ -53,6 +61,14 @@ class GamesController < ApplicationController
         format.html { redirect_to :new }
         format.json { render json: @game.errors, status: :unprocessable_entity }
       end
+    end
+  end
+
+  def update
+    @board.update(position_id: 0)
+    respond_to do |format|
+      format.html { redirect_to games_url, notice: 'Game was successfully reset.' }
+      format.json { head :no_content }
     end
   end
 
@@ -71,7 +87,7 @@ class GamesController < ApplicationController
     @board.destroy
   end
 
-private
+  private
 
   def end_game
     render :complete
