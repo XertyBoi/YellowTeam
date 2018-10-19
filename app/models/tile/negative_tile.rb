@@ -1,15 +1,17 @@
 class Tile
   class NegativeTile < Tile
-    def perform
+   def perform
+      @board.position_id +=5
       super
     end
 
-    def draw(position_id)
-      if id == position_id
-        "(0)"
-      else
-        "( )"
-      end
+    def draw
+    if id == @board.position_id
+      perform 	
+      "(0)"
+    else
+      "( )"
     end
+  end
   end
 end

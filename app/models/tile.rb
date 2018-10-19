@@ -7,7 +7,7 @@ class Tile
     @board = board
   end
 
-  def draw(position_id)
+  def draw
     if id == position_id
       "[0]"
     else
