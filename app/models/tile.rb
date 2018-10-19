@@ -1,9 +1,10 @@
 class Tile
-  attr_reader :id
+  attr_reader :id, :type
 
   def initialize(id, board)
     @id = id
     @board = board
+    @type = "normal"
   end
 
   def draw

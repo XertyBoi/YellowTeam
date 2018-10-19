@@ -1,0 +1,27 @@
+.board {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  margin: 0;
+  max-width: 770px;
+  padding: 0;
+}
+
+.tile {
+  background-color: green;
+  border: 1px solid black;
+  color: #ffffff;
+  display: flex;
+  justify-content: flex-end;
+  height: 75px;
+  list-style: none;
+  width: 75px;
+
+  &--positive {
+    background-color: orange;
+  }
+
+  &--negative {
+    background-color: red;
+  }
+}

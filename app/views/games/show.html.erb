@@ -1,9 +1,13 @@
 <h1>Game: <%=@game.name%></h1>
 <h2>ID: <%=@game.id%></h2>
 
-<% @tile_set.reverse.each do |current_tile| %>
-  <%= current_tile.draw %>
-<% end %>
+<ul class="board">
+  <% @tile_set.reverse.each do |current_tile| %>
+    <li class="tile tile--<%= current_tile.type %>">
+      <%= current_tile.id %>
+    </li>
+  <% end %>
+</ul>
 
 <p>Your roll: <%= @last_roll %></p>
 
