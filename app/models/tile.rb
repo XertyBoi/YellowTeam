@@ -8,7 +8,8 @@ class Tile
   end
 
   def draw
-    if id == position_id
+    if id == @board.position_id
+      perform
       "[0]"
     else
       "[ ]"
