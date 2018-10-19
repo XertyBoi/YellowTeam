@@ -1,5 +1,5 @@
 class GamesController < ApplicationController
-  before_action :set_vars, only: [:show]
+  before_action :set_vars, only: [:show,:destroy]
 
   def index
     @games = Game.all
@@ -28,6 +28,14 @@ class GamesController < ApplicationController
 
   def new
     @game = Game.new
+  end
+
+  def destroy
+    delete
+    respond_to do |format|
+      format.html { redirect_to games_url, notice: 'Game was successfully removed.' }
+      format.json { head :no_content }
+    end
   end
 
   def create
@@ -60,7 +68,7 @@ class GamesController < ApplicationController
     @board.destroy
   end
 
-private
+  private
 
   def end_game
     render :complete

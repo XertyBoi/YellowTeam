@@ -4,5 +4,6 @@ Rails.application.routes.draw do
 
   resources :games do
     get :update_roll
+    get :remove_active_game
   end
 end
