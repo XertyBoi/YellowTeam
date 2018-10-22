@@ -15,15 +15,6 @@ RSpec.describe Tile::PositiveTile, type: :model do
     expect(@tile.perform).to eq(true)
   end
 
-  it "returns an empty tile" do
-    @board.position_id = 2
-    expect(@tile.draw).to eq('{ }')
-  end
-
-  it "returns a tile with a counter on it" do
-    expect(@tile.draw).to eq('{0}')
-  end
-
   it "perform method increases board position id" do
     @tile.perform
     expect(@board.position_id).to be > 1

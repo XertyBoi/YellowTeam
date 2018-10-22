@@ -1,29 +1,33 @@
 <h1>Game: <%=@game.name%></h1>
 <h2>ID: <%=@game.id%></h2>
 
-
-<%=@board.position_id%>
-
-<ul class="board">
-  <% @tile_set.reverse.each do |current_tile| %>
-    <li class="tile tile--<%= current_tile.type %>">
-      <%= current_tile.id %>
-    </li>
-  <% end %>
-</ul>
-
-
-<p>Your roll: <%= @last_roll %></p>
-
-<%= @dice %>
-
-<%= button_to "Roll dice", game_update_roll_path(@game), method: :get %>
+<div class="column-wrapper">
+  <div class="left-column">
+    <ul class="board">
+      <% @tile_set.reverse.each do |current_tile| %>
+        <li
+          class="tile tile--<%= current_tile.type %>
+          <%= 'tile--has-counter' if current_tile.has_counter? %>"
+        >
+          <span class="tile__number">
+            <%= current_tile.id %>
+          </span>
+        </li>
+      <% end %>
+    </ul>
+  </div>
 
 
-<%= @current_player.nickname %> | <%= @current_player.uuid %> | active player
+  <div class="right-column">
+    <%= @current_player.nickname %> | <%= @current_player.uuid %> | active player
+    <ul>
+      <% @users_in_game.each do |u|%>
+        <li> <%= u.nickname %> | <%= u.uuid %> | Tile = <%= u.position_id %></li>
+      <% end %>
+    </ul>
 
-<ul>
-  <% @users_in_game.each do |u|%>
-    <li> <%= u.nickname %> | <%= u.uuid %> | Tile = <%= u.position_id %></li>
-  <% end %>
-</ul>
+    <p>Your roll: <%= @last_roll %></p>
+    <%= @dice %>
+    <%= button_to "Roll dice", game_update_roll_path(@game), method: :get, class: 'button' %>
+  </div>
+</div>
