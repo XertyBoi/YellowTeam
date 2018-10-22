@@ -16,7 +16,12 @@ class GamesController < ApplicationController
     @board = @game.board
     @tile_set = @board.get_tile_set
 
-    @board.position_id += @last_roll
+    @last_roll.times do |n|
+      @board.position_id += 1
+      #render again
+      #ßsleep(0.5)
+    end
+
     tiles_limit
     @board.save
     @tile_set[@board.position_id].perform
