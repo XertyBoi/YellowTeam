@@ -57,16 +57,11 @@ h1 {
   border: 1px solid #000000;
   color: #000000;
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
+  flex-wrap: wrap;
   height: 60px;
   list-style: none;
   width: 60px;
-
-  &__number {
-    align-self: flex-end;
-    display: flex;
-    margin: 0.25em;
-  }
 
   &--positive {
     background-color: #FFFF9D;
@@ -76,15 +71,38 @@ h1 {
     background-color: #FF6138;
   }
 
-  &--has-counter {
+  .counter {
     &:after {
-      background-color: pink;
       border-radius: 50%;
       content: "";
       display: block;
-      height: 25px;
+      height: 15px;
       margin-bottom: 0.25em;
-      width: 25px;
+      width: 15px;
+    }
+
+    &--0 {
+      &:after {
+        background-color: pink;
+      }
+    }
+
+    &--1 {
+      &:after {
+        background-color: green;
+      }
+    }
+
+    &--2 {
+      &:after {
+        background-color: blue;
+      }
+    }
+
+    &--3 {
+      &:after {
+        background-color: purple;
+      }
     }
   }
 }
