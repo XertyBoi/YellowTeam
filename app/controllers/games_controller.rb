@@ -31,11 +31,11 @@ class GamesController < ApplicationController
     if @board.position_id > 99
       @board.position_id = 99
     elsif @board.position_id < 0
-      @board.position_id = 0 
+      @board.position_id = 0
     else
       @board.position_id
     end
-  end 
+  end
 
   def new
     @game = Game.new
