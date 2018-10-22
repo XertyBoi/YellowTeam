@@ -6,11 +6,7 @@ class Tile
       @type = "positive"
     end
 
-    def perform
-      @board.position_id = @link
-      super
-    end
-
+    
     def draw
       if id == @board.position_id
         "{0}"

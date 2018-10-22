@@ -17,6 +17,6 @@ class Tile
   end
 
   def perform
-  	true
+    @board.position_id = @link if @link > 0
   end
 end
