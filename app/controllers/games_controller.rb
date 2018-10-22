@@ -1,5 +1,5 @@
 class GamesController < ApplicationController
-  before_action :set_vars, only: [:show,:destroy,:update]
+  before_action :set_vars, only: [:show,:destroy,:update, :end_turn]
 
   def index
     @games = Game.all
@@ -10,30 +10,64 @@ class GamesController < ApplicationController
     @last_roll = 0
   end
 
+  def add_user_to_game
+      if User.exists?(uuid: @user_id)
+        @user = User.find_by uuid: @user_id
+      else
+        @user = User.create(uuid: @user_id, game_id: @game.id, nickname: 'Dora', position_id: 0)
+      end
+  end
+
   def update_roll
     @last_roll = Dice.new.roll
     @game = Game.find(params[:game_id])
     @board = @game.board
     @tile_set = @board.get_tile_set
+    @users_in_game = User.where game_id: @game.id
+    @current_player = @users_in_game[@game.turn_id]
 
-    @board.position_id += @last_roll
+    add_user_to_game
+
+
+    if @current_player != @user
+      render :show
+      return
+    end
+
+    @current_player.position_id += @last_roll
+
     tiles_limit
-    @board.save
-    @tile_set[@board.position_id].perform
-    if @board.position_id >= 99
+    @current_player.save
+    @tile_set[@current_player.position_id].perform
+    if @current_player.position_id >= 99
       end_game
     else
+     end_turn
      render :show
     end
   end
 
-  def tiles_limit
-    if @board.position_id > 99
-      @board.position_id = 99
-    elsif @board.position_id < 0
-      @board.position_id = 0
+  def end_turn
+    #check if active user id + 1 is null if so go back to first, if not +1
+    if (@users_in_game[@game.turn_id + 1].nil?)
+      #is nil so go back to 1st player
+      puts "turn id nil"
+      @game.turn_id = 0
     else
-      @board.position_id
+      puts "turn id not nil"
+      @game.turn_id += 1
+    end
+
+    @game.save
+  end
+
+  def tiles_limit
+    if @current_player.position_id > 99
+      @current_player.position_id = 99
+    elsif @current_player.position_id < 0
+      @current_player.position_id = 0
+    else
+      @current_player.position_id
     end
   end
 
@@ -73,18 +107,22 @@ class GamesController < ApplicationController
   end
 
   def game_params
-    params.require(:game).permit(:name)
+    params.require(:game).permit(:name, :turn_id)
   end
 
   def set_vars
     @game = Game.find(params[:id])
     @board = @game.board
     @tile_set = @board.get_tile_set
+    @users_in_game = User.where game_id: @game.id
+    add_user_to_game
+    @current_player = @users_in_game[@game.turn_id]
   end
 
   def delete
-    @game.destroy
+    @users_in_game.each { |u| u.destroy }
     @board.destroy
+    @game.destroy
   end
 
   private

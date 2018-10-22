@@ -3,15 +3,17 @@
 #
 # Examples:
 #
-  
+
 
   99.downto(0) do |n|
   	if n%10 == 0
-  	  Tiles.create(id: n, tile_type: "positive")
+      tails = rand((n+1)..((n+1)+9))
+  	  Tiles.create(id: n, tile_type: "positive", link_id: tails)
   	elsif n%7 == 0
-  	  Tiles.create(id: n, tile_type: "negative")
-  	else  		  	
-      Tiles.create(id: n, tile_type: "none")
+      tails = rand(n-6..(n-1))
+  	  Tiles.create(id: n, tile_type: "negative", link_id: tails)
+  	else
+      Tiles.create(id: n, tile_type: "none", link_id: 0)
     end
   end
 

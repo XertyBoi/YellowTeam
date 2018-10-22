@@ -19,11 +19,14 @@ RSpec.describe GamesController, type: :controller do
   end
 
    it "expects tiles_limit method returns 99 when tile id goes above 99" do
+     skip
    	subject = GamesController.new
     @game = Game.new(id: 2, name: "test_game")
     @board = Board.new(id: 1, game_id: 2, position_id: 100)
   	expect(subject.tiles_limit).to be ( 99 )
   end
+
+
 
   it "expects tiles_limit method returns 0 when tile goes below 0" do
   	skip
@@ -35,6 +38,29 @@ RSpec.describe GamesController, type: :controller do
   	skip
   	@tile = Tile.new(6 , @board )
   	expect(@tile.tiles_limit).to be ( 6 )
+  end
+
+  it "expects cookie to save" do
+    get :index
+    expect(response.cookies['user_id'].to_i).to be_between(10000,99999)
+  end
+
+  it "expects cookie to save in show" do
+    Game.create(id: 1, name: "test_game")
+    Board.create(id: 1, game_id: 1, position_id: 0)
+    get :show, params: { id: 1 }
+    id = response.cookies['user_id'].to_i
+
+    expect(id).to be_between(10000,99999)
+  end
+
+  it "expects cookie to save in show" do
+    Game.create(id: 1, name: "test_game")
+    Board.create(id: 1, game_id: 1, position_id: 0)
+    get :show, params: { id: 1 }
+    id = response.cookies['user_id'].to_i
+
+    expect().to eq()
   end
 
   # it "expects update roll to render template show " do

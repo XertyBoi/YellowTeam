@@ -1,4 +1,5 @@
 <h1>Game: <%=@game.name%></h1>
+<h2>ID: <%=@game.id%></h2>
 
 <div class="column-wrapper">
   <div class="left-column">
@@ -16,11 +17,17 @@
     </ul>
   </div>
 
+
   <div class="right-column">
+    <%= @current_player.nickname %> | <%= @current_player.uuid %> | active player
+    <ul>
+      <% @users_in_game.each do |u|%>
+        <li> <%= u.nickname %> | <%= u.uuid %> | Tile = <%= u.position_id %></li>
+      <% end %>
+    </ul>
+
     <p>Your roll: <%= @last_roll %></p>
-
     <%= @dice %>
-
     <%= button_to "Roll dice", game_update_roll_path(@game), method: :get, class: 'button' %>
   </div>
 </div>

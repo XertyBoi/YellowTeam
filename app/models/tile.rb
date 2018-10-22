@@ -1,8 +1,9 @@
 class Tile
   attr_reader :id, :type
 
-  def initialize(id, board)
+  def initialize(id, board, link_id)
     @id = id
+    @link = link_id
     @board = board
     @type = "normal"
   end
@@ -12,6 +13,6 @@ class Tile
   end
 
   def perform
-  	true
+    @board.position_id = @link if @link > 0
   end
 end
