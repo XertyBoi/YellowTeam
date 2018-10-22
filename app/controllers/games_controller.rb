@@ -37,8 +37,8 @@ class GamesController < ApplicationController
     @current_player.position_id += @last_roll
 
     tiles_limit
+    @tile_set[@current_player.position_id].perform(@current_player)
     @current_player.save
-    @tile_set[@current_player.position_id].perform
     if @current_player.position_id >= 99
       end_game
     else

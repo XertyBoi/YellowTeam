@@ -8,11 +8,11 @@ class Tile
     @type = "normal"
   end
 
-  def has_counter?
-    @id == @board.position_id
+  def has_counter?(user)
+    @id == user.position_id
   end
 
-  def perform
-    @board.position_id = @link if @link > 0
+  def perform(user)
+    user.position_id = @link if @link > 0
   end
 end
