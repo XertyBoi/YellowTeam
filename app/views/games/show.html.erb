@@ -19,17 +19,24 @@
     </ul>
   </div>
 
-
   <div class="right-column">
-    <%= @current_player.nickname %> | <%= @current_player.uuid %> | active player
-    <ul>
-      <% @users_in_game.each do |u|%>
-        <li> <%= u.nickname %> | <%= u.uuid %> | Tile = <%= u.position_id %></li>
-      <% end %>
-    </ul>
+    <div>
+      <h3>Players in game</h3>
+      <ul class="player-list">
+        <% @users_in_game.each_with_index do |u, index|%>
+          <li class="player-list__player">
+            <%= u.nickname %> |
+            <span class="counter <%= "counter--#{index}" %>"></span>
+            &nbsp;<%= '<-- Your turn' if @current_player.uuid == u.uuid %>
+          </li>
+        <% end %>
+      </ul>
+    </div>
 
-    <p>Your roll: <%= @last_roll %></p>
-    <%= @dice %>
-    <%= button_to "Roll dice", game_update_roll_path(@game), method: :get, class: 'button' %>
+    <div>
+      <p>Your roll: <%= @last_roll %></p>
+      <%= @dice %>
+      <%= button_to "Roll dice", game_update_roll_path(@game), method: :get, class: 'button' %>
+    </div>
   </div>
 </div>

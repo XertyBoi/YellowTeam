@@ -11,11 +11,11 @@ class GamesController < ApplicationController
   end
 
   def add_user_to_game
-      if User.exists?(uuid: @user_id)
-        @user = User.find_by uuid: @user_id
-      else
-        @user = User.create(uuid: @user_id, game_id: @game.id, nickname: 'Dora', position_id: 0)
-      end
+    if User.exists?(uuid: @user_id)
+      @user = User.find_by uuid: @user_id
+    else
+      @user = User.create(uuid: @user_id, game_id: @game.id, nickname: "Player#{@user_id}", position_id: 0)
+    end
   end
 
   def update_roll
