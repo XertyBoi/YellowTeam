@@ -28,7 +28,6 @@ class GamesController < ApplicationController
 
     add_user_to_game
 
-
     if @current_player != @user
       render :show
       return
@@ -48,13 +47,9 @@ class GamesController < ApplicationController
   end
 
   def end_turn
-    #check if active user id + 1 is null if so go back to first, if not +1
     if (@users_in_game[@game.turn_id + 1].nil?)
-      #is nil so go back to 1st player
-      puts "turn id nil"
       @game.turn_id = 0
     else
-      puts "turn id not nil"
       @game.turn_id += 1
     end
 
