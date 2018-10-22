@@ -11,11 +11,11 @@ class GamesController < ApplicationController
   end
 
   def add_user_to_game
-      if User.exists?(uuid: @user_id)
-        @user = User.find_by uuid: @user_id
-      else
-        @user = User.create(uuid: @user_id, game_id: @game.id, nickname: 'Dora', position_id: 0)
-      end
+    if User.exists?(uuid: @user_id)
+      @user = User.find_by uuid: @user_id
+    else
+      @user = User.create(uuid: @user_id, game_id: @game.id, nickname: "Player#{@user_id}", position_id: 0)
+    end
   end
 
   def update_roll
@@ -28,7 +28,6 @@ class GamesController < ApplicationController
 
     add_user_to_game
 
-
     if @current_player != @user
       render :show
       return
@@ -37,8 +36,8 @@ class GamesController < ApplicationController
     @current_player.position_id += @last_roll
 
     tiles_limit
+    @tile_set[@current_player.position_id].perform(@current_player)
     @current_player.save
-    @tile_set[@current_player.position_id].perform
     if @current_player.position_id >= 99
       end_game
     else
@@ -48,13 +47,9 @@ class GamesController < ApplicationController
   end
 
   def end_turn
-    #check if active user id + 1 is null if so go back to first, if not +1
     if (@users_in_game[@game.turn_id + 1].nil?)
-      #is nil so go back to 1st player
-      puts "turn id nil"
       @game.turn_id = 0
     else
-      puts "turn id not nil"
       @game.turn_id += 1
     end
 
