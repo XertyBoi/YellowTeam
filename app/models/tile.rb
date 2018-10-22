@@ -7,12 +7,8 @@ class Tile
     @type = "normal"
   end
 
-  def draw
-    if id == @board.position_id
-      "[0]"
-    else
-      "[ ]"
-    end
+  def has_counter?
+    @id == @board.position_id
   end
 
   def perform
