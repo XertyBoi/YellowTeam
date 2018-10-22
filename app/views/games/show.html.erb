@@ -12,8 +12,18 @@
   <% end %>
 </ul>
 
+
 <p>Your roll: <%= @last_roll %></p>
 
 <%= @dice %>
 
 <%= button_to "Roll dice", game_update_roll_path(@game), method: :get %>
+
+
+<%= @current_player.nickname %> | <%= @current_player.uuid %> | active player
+
+<ul>
+  <% @users_in_game.each do |u|%>
+    <li> <%= u.nickname %> | <%= u.uuid %> | Tile = <%= u.position_id %></li>
+  <% end %>
+</ul>

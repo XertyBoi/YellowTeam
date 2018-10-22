@@ -3,7 +3,9 @@
     <%= form.label :name %>
     <%= form.text_field :name %>
   </div>
-  
+
+  <%= form.hidden_field :turn_id, :value => 0 %>
+
   <div>
     <%= form.submit "Create game" %>
   </div>
