@@ -82,7 +82,7 @@ h3 {
 
 .tile {
   align-items: center;
-  background-color: #00A388;
+  background-image: image-url("tile.png");
   border: 1px solid #000000;
   color: #000000;
   display: flex;
@@ -168,17 +168,17 @@ h3 {
   }
 
   &--positive {
-    background-color: #FFFF9D;
+    background-image: image-url("shortcut_tile.png");
   }
 
   &--negative {
-    background-color: #FF6138;
+    background-image: image-url("broken_tile.png");
   }
 }
 
 .counter {
   &:after {
-    border-radius: 50%;
+    border-radius: 0%;
     content: "";
     display: inline-block;
     height: 15px;
@@ -187,25 +187,25 @@ h3 {
 
   &--0 {
     &:after {
-      background-color: pink;
+      background-image: image-url("sprite_red.png")
     }
   }
 
   &--1 {
     &:after {
-      background-color: green;
+      background-image: image-url("sprite_green.png")
     }
   }
 
   &--2 {
     &:after {
-      background-color: blue;
+      background-image: image-url("sprite_blue.png")
     }
   }
 
   &--3 {
     &:after {
-      background-color: purple;
+      background-image: image-url("sprite_purple.png")
     }
   }
 }
