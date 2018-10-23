@@ -7,7 +7,6 @@ class GamesController < ApplicationController
 
   def show
     @game = Game.find(params[:id])
-    @last_roll = 0
   end
 
   def add_user_to_game
@@ -42,7 +41,7 @@ class GamesController < ApplicationController
       end_game
     else
      end_turn
-     render :show
+     redirect_to game_path(@game.id)
     end
   end
 
