@@ -18,12 +18,16 @@ snakes_hash = {
 ladders_hash = {
   4 => 14,
   9 => 31,
-  20 => 38,
   28 => 84,
-  40 => 59,
   63 => 81,
-  71 => 91
 }
+
+lower_right_array = [10,30,50,70,90]
+upper_right_array = [11,31,51,71,91]
+
+
+lower_left_array = [20,40,60,80]
+upper_left_array = [21,41,61,81]
 
 
   100.downto(1) do |n|
@@ -31,6 +35,14 @@ ladders_hash = {
       Tiles.create(id: n, tile_type: "negative", link_id: snakes_hash[n])
     elsif ladders_hash.include? n
       Tiles.create(id: n, tile_type: "positive", link_id: ladders_hash[n])
+    elsif lower_right_array.include? n
+      Tiles.create(id: n, tile_type: "lrc", link_id: 0)
+    elsif upper_right_array.include? n
+      Tiles.create(id: n, tile_type: "urc", link_id: 0)
+    elsif lower_left_array.include? n
+      Tiles.create(id: n, tile_type: "llc", link_id: 0)
+    elsif upper_left_array.include? n
+      Tiles.create(id: n, tile_type: "ulc", link_id: 0)
     else
       Tiles.create(id: n, tile_type: "none", link_id: 0)
     end

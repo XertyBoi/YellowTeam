@@ -69,9 +69,9 @@ class GamesController < ApplicationController
     log("#{@current_player.nickname} rolled a #{@last_roll}!")
 
     if tile_landed_on.instance_of? Tile::PositiveTile
-      log "#{@current_player.nickname} found a shortcut to tile #{tile_landed_on.link}!"
+      log "#{@current_player.nickname} found a shortcut on tile #{tile_landed_on.id} to tile #{tile_landed_on.link}!"
     elsif tile_landed_on.instance_of? Tile::NegativeTile
-      log "#{@current_player.nickname} fell through a hole in the tracks and landed on tile #{tile_landed_on.link}!"
+      log "#{@current_player.nickname} fell through a hole in the tracks on tile #{tile_landed_on.id} and landed on tile #{tile_landed_on.link}!"
     end
 
     @current_player.save
