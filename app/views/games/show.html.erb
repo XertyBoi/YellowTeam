@@ -35,6 +35,10 @@
       </ul>
       <h3>Game log</h3>
       <div class="game-log">
+        <% @game.log.split('£').each do |line| %>
+          <span><%= line %></span>
+          <br>
+        <% end %>
       </div>
     </div>
 

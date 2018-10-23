@@ -6,7 +6,6 @@ class GamesController < ApplicationController
   end
 
   def show
-    @game = Game.find(params[:id])
   end
 
   def add_user_to_game
@@ -14,7 +13,18 @@ class GamesController < ApplicationController
       @user = User.find_by uuid: @user_id
     else
       @user = User.create(uuid: @user_id, game_id: @game.id, nickname: "Player#{@user_id}", position_id: 0)
+      log("#{@user.nickname} has joined the game!")
     end
+  end
+
+  def log(msg)
+
+    array_log = @game.log.split('£')
+    array_log.shift if array_log.size == 10
+    array_log << "[#{Time.now.strftime("%H:%M:%S")}] #{msg}"
+
+    @game.log = array_log.join('£')
+    @game.save
   end
 
   def update_roll
@@ -25,7 +35,6 @@ class GamesController < ApplicationController
     @users_in_game = User.where game_id: @game.id
     @current_player = @users_in_game[@game.turn_id]
     @new_position = tiles_limit(@current_player, @last_roll)
-
     add_user_to_game
 
     if @current_player != @user
@@ -35,6 +44,7 @@ class GamesController < ApplicationController
 
     @tile_set[@new_position].perform(@current_player)
     @current_player.position_id = @new_position
+    log("#{@current_player.nickname} rolled a #{@last_roll}!")
     @current_player.save
     if @new_position == 99
       end_game
@@ -95,6 +105,8 @@ class GamesController < ApplicationController
 
   def update
     @users_in_game.each{|user| user.update(position_id: 0)}
+    @game.log = ""
+    @game.save
     respond_to do |format|
       format.html { redirect_to games_url, notice: 'Game was successfully reset.' }
       format.json { head :no_content }
@@ -102,16 +114,23 @@ class GamesController < ApplicationController
   end
 
   def game_params
-    params.require(:game).permit(:name, :turn_id)
+    params.require(:game).permit(:name, :turn_id, :log)
   end
 
   def set_vars
-    @game = Game.find(params[:id])
+    begin
+      @game = Game.find(params[:id])
+    rescue
+      render :complete
+      return
+    end
+
     @board = @game.board
     @tile_set = @board.get_tile_set
-    @users_in_game = User.where game_id: @game.id
     add_user_to_game
+    @users_in_game = User.where game_id: @game.id
     @current_player = @users_in_game[@game.turn_id]
+
   end
 
   def delete
