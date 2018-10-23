@@ -1,5 +1,5 @@
 class GamesController < ApplicationController
-  before_action :set_vars, only: [:show,:destroy,:update,:end_turn]
+  before_action :set_vars, only: [:show, :destroy, :update,  :end_turn]
 
   def index
     @games = Game.all
@@ -34,6 +34,7 @@ class GamesController < ApplicationController
     @tile_set = @board.get_tile_set
     @users_in_game = User.where game_id: @game.id
     @current_player = @users_in_game[@game.turn_id]
+    @new_position = tiles_limit(@current_player, @last_roll)
     add_user_to_game
 
     if @current_player != @user
@@ -41,13 +42,11 @@ class GamesController < ApplicationController
       return
     end
 
+    @tile_set[@new_position].perform(@current_player)
+    @current_player.position_id = @new_position
     log("#{@current_player.nickname} rolled a #{@last_roll}!")
-    @current_player.position_id += @last_roll
-
-    tiles_limit
-    @tile_set[@current_player.position_id].perform(@current_player)
     @current_player.save
-    if @current_player.position_id >= 99
+    if @new_position == 99
       end_game
     else
      end_turn
@@ -65,14 +64,16 @@ class GamesController < ApplicationController
     @game.save
   end
 
-  def tiles_limit
-    if @current_player.position_id > 99
-      @current_player.position_id = 99
-    elsif @current_player.position_id < 0
-      @current_player.position_id = 0
+  def tiles_limit(player, increment)
+    new_position = player.position_id += increment
+    if player.position_id > 99
+      new_position = 99 - (new_position - 99)
+    elsif player.position_id < 0
+      new_position = 0
     else
-      @current_player.position_id
+      new_position
     end
+    new_position
   end
 
   def new
