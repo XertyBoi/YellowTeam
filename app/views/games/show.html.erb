@@ -34,7 +34,6 @@
     </div>
 
     <div>
-      <p>Your roll: <%= @last_roll %></p>
       <%= @dice %>
       <%= button_to "Roll dice", game_update_roll_path(@game), method: :get, class: 'button' %>
     </div>
