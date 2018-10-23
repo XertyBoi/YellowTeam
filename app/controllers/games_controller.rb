@@ -80,7 +80,7 @@ class GamesController < ApplicationController
 
   def create
     @game = Game.create(game_params)
-    @board = Board.create(game_id: @game.id, position_id: 0, tile_set: "default")
+    @board = Board.create(game_id: @game.id, tile_set: "default")
 
     respond_to do |format|
       if @game.save
