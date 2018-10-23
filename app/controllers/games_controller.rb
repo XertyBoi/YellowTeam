@@ -94,7 +94,7 @@ class GamesController < ApplicationController
   end
 
   def update
-    @board.update(position_id: 0)
+    @users_in_game.each{|user| user.update(position_id: 0)}
     respond_to do |format|
       format.html { redirect_to games_url, notice: 'Game was successfully reset.' }
       format.json { head :no_content }
