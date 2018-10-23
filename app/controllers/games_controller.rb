@@ -105,12 +105,18 @@ class GamesController < ApplicationController
   end
 
   def set_vars
-    @game = Game.find(params[:id])
-    @board = @game.board
-    @tile_set = @board.get_tile_set
-    @users_in_game = User.where game_id: @game.id
-    add_user_to_game
-    @current_player = @users_in_game[@game.turn_id]
+    begin
+      @game = Game.find(params[:id])
+      @board = @game.board
+      @tile_set = @board.get_tile_set
+      @users_in_game = User.where game_id: @game.id
+      add_user_to_game
+      @current_player = @users_in_game[@game.turn_id]
+    rescue
+      render :complete
+    end
+    
+
   end
 
   def delete
