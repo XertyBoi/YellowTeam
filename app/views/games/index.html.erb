@@ -1,6 +1,12 @@
-<h1>Active Games</h1> <%= link_to "Rules" %>
+<div class="menu">
+<h1>
+  Active Games
+</h1>
 
-<ul>
+ <%= link_to "Rules" %>
+
+<div>
+<ul class="games-list">
   <% @games.each do |game| %>
     <li>
       <%= game.name%> |
@@ -10,5 +16,7 @@
     </li>
   <% end %>
 </ul>
+</div>
 
-<%= link_to "New Game", new_game_path %>
+<%= button_to "New Game", new_game_path, method: :get %>
+</div>

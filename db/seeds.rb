@@ -4,15 +4,34 @@
 # Examples:
 #
 
+snakes_hash = {
+  17 => 7,
+  54 => 34,
+  62 => 18,
+  64 => 60,
+  87 => 24,
+  93 => 73,
+  95 => 75,
+  99 => 78
+}
 
-  99.downto(0) do |n|
-  	if n%10 == 0
-      tails = rand((n+1)..((n+1)+9))
-  	  Tiles.create(id: n, tile_type: "positive", link_id: tails)
-  	elsif n%7 == 0
-      tails = rand(n-6..(n-1))
-  	  Tiles.create(id: n, tile_type: "negative", link_id: tails)
-  	else
+ladders_hash = {
+  4 => 14,
+  9 => 31,
+  20 => 38,
+  28 => 84,
+  40 => 59,
+  63 => 81,
+  71 => 91
+}
+
+
+  100.downto(1) do |n|
+    if snakes_hash.include? n
+      Tiles.create(id: n, tile_type: "negative", link_id: snakes_hash[n])
+    elsif ladders_hash.include? n
+      Tiles.create(id: n, tile_type: "positive", link_id: ladders_hash[n])
+    else
       Tiles.create(id: n, tile_type: "none", link_id: 0)
     end
   end

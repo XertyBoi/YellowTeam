@@ -1,5 +1,5 @@
 class Tile
-  attr_reader :id, :type
+  attr_reader :id, :type, :link
 
   def initialize(id, board, link_id)
     @id = id
@@ -15,7 +15,6 @@ class Tile
   def perform(user)
     if @link > 0
       user.position_id = @link
-      # @board.get_tile_set[user.position_id].perform(user)
     end
   end
 end

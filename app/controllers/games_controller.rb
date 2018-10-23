@@ -24,7 +24,7 @@ class GamesController < ApplicationController
 
   def check_for_end
     @users_in_game.each do |user|
-      end_game if user.position_id == 99
+      end_game if user.position_id == 100
     end
   end
 
@@ -32,7 +32,7 @@ class GamesController < ApplicationController
     if User.exists?(uuid: @user_id)
       @user = User.find_by uuid: @user_id
     else
-      @user = User.create(uuid: @user_id, game_id: @game.id, nickname: "Player#{@user_id}", position_id: 0)
+      @user = User.create(uuid: @user_id, game_id: @game.id, nickname: "Player#{@user_id}", position_id: 1)
       log("#{@user.nickname} has joined the game!")
     end
   end
@@ -64,11 +64,18 @@ class GamesController < ApplicationController
     @new_position = tiles_limit(@current_player, @last_roll)
     @current_player.position_id = @new_position
 
-    @tile_set[@current_player.position_id].perform(@current_player)
-
+    tile_landed_on = @tile_set[@current_player.position_id-1]
+    tile_landed_on.perform(@current_player)
     log("#{@current_player.nickname} rolled a #{@last_roll}!")
+
+    if tile_landed_on.instance_of? Tile::PositiveTile
+      log "#{@current_player.nickname} found a shortcut to tile #{tile_landed_on.link}!"
+    elsif tile_landed_on.instance_of? Tile::NegativeTile
+      log "#{@current_player.nickname} fell through a hole in the tracks and landed on tile #{tile_landed_on.link}!"
+    end
+
     @current_player.save
-    end_turn if @current_player.position_id != 99
+    end_turn if @current_player.position_id != 100
     redirect_to game_path(@game.id)
   end
 
@@ -84,10 +91,10 @@ class GamesController < ApplicationController
 
   def tiles_limit(player, increment)
     new_position = player.position_id += increment
-    if player.position_id > 99
-      new_position = 99 - (new_position - 99)
-    elsif player.position_id < 0
-      new_position = 0
+    if player.position_id > 100
+      new_position = 100 - (new_position - 100)
+    elsif player.position_id < 1
+      new_position = 1
     else
       new_position
     end
@@ -122,7 +129,7 @@ class GamesController < ApplicationController
   end
 
   def update
-    @users_in_game.each{|user| user.update(position_id: 0)}
+    @users_in_game.each{|user| user.update(position_id: 1)}
     @game.log = ""
     @game.save
     respond_to do |format|
