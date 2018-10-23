@@ -10,11 +10,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_10_23_083607) do
+ActiveRecord::Schema.define(version: 2018_10_23_091918) do
 
   create_table "boards", force: :cascade do |t|
     t.integer "game_id"
-    t.integer "position_id"
     t.string "tile_set"
   end
 
