@@ -3,7 +3,15 @@ class GamesController < ApplicationController
 
   def index
     @games = Game.all
+    if (has_user?)
+      @user = User.find_by uuid: @user_id
+      @user.destroy
+    end  
   end
+
+  def has_user?
+    User.exists?(uuid: cookies[:user_id])
+  end  
 
   def show
     check_for_end
