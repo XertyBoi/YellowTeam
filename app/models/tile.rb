@@ -13,6 +13,9 @@ class Tile
   end
 
   def perform(user)
-    user.position_id = @link if @link > 0
+    if @link > 0
+      user.position_id = @link
+      @board.get_tile_set[user.position_id].perform(user)
+    end
   end
 end
