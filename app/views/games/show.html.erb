@@ -6,8 +6,8 @@
 <div class="column-wrapper">
   <div class="left-column">
     <ul class="board">
-      <% @tile_set.reverse.each do |current_tile| %>
-        <li class="tile tile--<%= current_tile.type %>">
+      <% @tile_set.each_with_index do |current_tile, index| %>
+        <li class="tile tile--<%= index %> tile--<%= current_tile.type %>">
           <span class="tile__number">
             <%= current_tile.id %>
           </span>
