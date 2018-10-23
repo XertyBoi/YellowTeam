@@ -27,7 +27,7 @@
       <ul class="player-list">
         <% @users_in_game.each_with_index do |u, index|%>
           <li class="player-list__player">
-            <%= u.nickname %> |
+            <%= "#{u.nickname} " + ((u.uuid.to_i == @user_id.to_i)? "(YOU)" : "") %> |
             <span class="counter <%= "counter--#{index}" %>"></span>
             &nbsp;<%= '<-- Your turn' if @current_player.uuid == u.uuid %>
           </li>
@@ -43,7 +43,10 @@
     </div>
 
     <div>
-      <%= @dice %>
+      <%= button_to "Leave Game", root_path, method: :get, class: 'button button--exit' %>
+    </div>
+
+    <div>
       <%= button_to "Roll dice", game_update_roll_path(@game), method: :get, class: 'button' %>
     </div>
   </div>

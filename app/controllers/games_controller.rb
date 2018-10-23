@@ -8,12 +8,12 @@ class GamesController < ApplicationController
       @game = Game.find_by id: user.game_id
       log("#{user.nickname} has left the game!")
       user.destroy
-    end  
+    end
   end
 
   def has_user?
     User.exists?(uuid: cookies[:user_id])
-  end  
+  end
 
   def show
     check_for_end
@@ -149,6 +149,7 @@ class GamesController < ApplicationController
     @users_in_game = User.where game_id: @game.id
     @current_player = @users_in_game[@game.turn_id]
 
+    @current_player = @users_in_game.first if @current_player.nil?
   end
 
   def delete

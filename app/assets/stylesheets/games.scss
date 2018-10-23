@@ -49,6 +49,15 @@ h3 {
     background-color: darken(#008000, 5%);
     cursor: pointer;
   }
+
+  &--exit {
+    background-color: red;
+
+    &:hover {
+      background-color: darken(red, 5%);
+      cursor: pointer;
+    }
+  }
 }
 
 .board {
