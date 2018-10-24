@@ -1,27 +1,24 @@
 require 'rails_helper'
 
 RSpec.describe Tile, type: :model do
-  before :each do
-    @board = Board.new(id: 1, game_id: 1, position_id: 1, tile_set: 'default')
-    @tile = Tile.new(1 , @board )
+   before :each do
+    @board = Board.new(id: 1, game_id: 1,tile_set: 'default')
+    @tile = Tile.new(5 , @board, 1 )
+    @user = User.new(uuid: 10011, game_id: 1, nickname: "test", position_id: 17)
   end
 
-  it "expects new instance of tile exists" do
-    expect(@tile.nil?).to eq false
-  end
+	it "expects new instance of tile exists" do
+	  expect(@tile.nil?).to eq false
+	end
 
-  it "expects perform method to return true" do
-    expect(@tile.perform).to eq true
-  end
+	it "expects perform method to not to return nil" do
+      @tile.perform(@user)
+	  expect(@user.position_id.nil?).to eq false
+	end
 
-  context "has counter method" do
-    it "returns true if the tile has a counter" do
-      expect(@tile.has_counter?).to eq true
-    end
-
-    it "returns false if the tile does not have a counter" do
-      @tile = Tile.new(2, @board)
-      expect(@tile.has_counter?).to eq false
-    end
-  end
+	it "expects has_counter method is not returning nil" do
+	  @tile = Tile.new(17 , @board, 1 )
+	  expect(@tile.has_counter?(@user)).to eq true
+	end
+  
 end
