@@ -61,17 +61,18 @@ class GamesController < ApplicationController
       return
     end
 
+    @old_position = @current_player.position_id
     @new_position = tiles_limit(@current_player, @last_roll)
     @current_player.position_id = @new_position
 
     tile_landed_on = @tile_set[@current_player.position_id-1]
     tile_landed_on.perform(@current_player)
-    log("#{@current_player.nickname} rolled a #{@last_roll}!")
+    log("#{@current_player.nickname} rolled a #{@last_roll}! [#{@old_position} to #{@new_position}]")
 
     if tile_landed_on.instance_of? Tile::PositiveTile
-      log "#{@current_player.nickname} found a shortcut to tile #{tile_landed_on.link}!"
+      log "#{@current_player.nickname} found a shortcut on tile #{tile_landed_on.id} to tile #{tile_landed_on.link}!"
     elsif tile_landed_on.instance_of? Tile::NegativeTile
-      log "#{@current_player.nickname} fell through a hole in the tracks and landed on tile #{tile_landed_on.link}!"
+      log "#{@current_player.nickname} fell through a hole in the tracks on tile #{tile_landed_on.id} and landed on tile #{tile_landed_on.link}!"
     end
 
     @current_player.save
