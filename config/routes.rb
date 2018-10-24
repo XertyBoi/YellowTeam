@@ -5,5 +5,4 @@ Rails.application.routes.draw do
   resources :games do
     get :update_roll
   end
-
 end
