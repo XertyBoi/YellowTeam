@@ -1,8 +1,8 @@
 require 'rails_helper'
 
 RSpec.describe Game, type: :model do
-  it "expects new game not to be null" do
-    game = Game.new(id: 2, name: "test_game")
-    expect(game.class).to eq( Game)
+  it "creates a game" do
+    @game = Game.create(name: 'Test game', turn_id: 0, log: 'log')
+    expect(@game.class).to be(Game)
   end
 end
