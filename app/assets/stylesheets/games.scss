@@ -342,3 +342,10 @@ h3 {
 .highlight {
   background-color: peachpuff;
 }
+
+.game-over {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 1em;
+}
