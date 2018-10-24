@@ -32,8 +32,12 @@ class GamesController < ApplicationController
     if User.exists?(uuid: @user_id)
       @user = User.find_by uuid: @user_id
     else
+      if (User.where game_id: @game.id).size >= 4
+      log("A spectator has started watching the game!")
+      else
       @user = User.create(uuid: @user_id, game_id: @game.id, nickname: "Player#{@user_id}", position_id: 1)
       log("#{@user.nickname} has joined the game!")
+      end
     end
   end
 
