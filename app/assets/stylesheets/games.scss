@@ -152,6 +152,10 @@ h3 {
     text-decoration: none;
     width: auto;
   }
+
+  &--full {
+    width: 100%;
+  }
 }
 
 .board {
@@ -166,13 +170,13 @@ h3 {
   font-size: 1em;
   align-items: center;
   background-image: image-url("tile.png");
-  border: no_content;
   color: #FFFFFF;
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   flex-wrap: wrap;
-  min-height: 60px;
+  justify-content: space-between;
   list-style: none;
+  min-height: 60px;
   min-width: 60px;
 
   @for $i from 0 through 9 {
@@ -273,6 +277,21 @@ h3 {
   &--negative {
     background-image: image-url("broken_tile.png");
   }
+
+  &__numbers {
+    align-self: flex-end;
+    color: #CCCCCC;
+    margin: 4px;
+    opacity: 0.45;
+    text-shadow: 0.5px 0.5px 0.5px #000000;
+  }
+
+  &__counters {
+    display: flex;
+    justify-content: space-evenly;
+    margin-bottom: 3px;
+    width: 100%;
+  }
 }
 
 .counter {
@@ -310,19 +329,31 @@ h3 {
 }
 
 .player-list {
-  list-style: none;
   margin: 0 0 1em 0;
-  padding: 0;
 
   &__player {
     align-items: center;
     display: flex;
+  }
+
+  th {
+    text-align: left;
+  }
+
+  tr th:nth-child(2),
+  tr td:nth-child(2) {
+    padding-left: 1em;
   }
 }
 
 .game-log {
   background-color: #FFFFFF;
   border: 1px solid #000000;
-  height: 20em;
+  height: 15em;
+  overflow-x: scroll;
   padding: 0.25em;
+}
+
+.highlight {
+  background-color: peachpuff;
 }

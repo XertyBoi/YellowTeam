@@ -8,14 +8,16 @@
     <ul class="board">
       <% @tile_set.each_with_index do |current_tile, index| %>
         <li class="tile tile--<%= index %> tile--<%= current_tile.type %>">
-          <span class="tile__number">
+          <span class="tile__numbers">
             <%= current_tile.id %>
           </span>
-          <% @users_in_game.each_with_index do |user, index| %>
-            <% if user.position_id == current_tile.id %>
-              <span class="counter <%= "counter--#{index}" %>"></span>
+          <span class="tile__counters">
+            <% @users_in_game.each_with_index do |user, index| %>
+              <% if user.position_id == current_tile.id %>
+                <span class="counter <%= "counter--#{index}" %>"></span>
+              <% end %>
             <% end %>
-          <% end %>
+          </span>
         </li>
       <% end %>
     </ul>
@@ -24,26 +26,35 @@
   <div class="right-column">
     <div>
       <h3>Players in game</h3>
-      <ul class="player-list">
+      <table class="player-list">
+        <tr>
+          <th>Nickname</th>
+          <th>Gem</th>
+        </tr>
         <% @users_in_game.each_with_index do |u, index|%>
-          <li class="player-list__player">
-            <%= "#{u.nickname} " + ((u.uuid.to_i == @user_id.to_i)? "(YOU)" : "") %> |
-            <span class="counter <%= "counter--#{index}" %>"></span>
-            &nbsp;<%= '<-- Your turn' if @current_player.uuid == u.uuid %>
-          </li>
+          <tr>
+            <td>
+              <% if u.uuid.to_i == @user_id.to_i %>
+                <span class="highlight">
+                  <%= u.nickname %>
+                <span>
+              <% else %>
+                <%= u.nickname %>
+              <% end %>
+            </td>
+            <td>
+              <span class="counter <%= "counter--#{index}" %>"></span>
+              &nbsp;<%= '<-- Your turn' if @current_player.uuid == u.uuid %>
+            </td>
+          </tr>
         <% end %>
-      </ul>
-      <h3>Game log</h3>
-      <div class="game-log">
-        <% @game.log.split('£').each do |line| %>
-          <span><%= line %></span>
-          <br>
-        <% end %>
-      </div>
+      </table>
+
+      <%= render :partial => 'log' %>
     </div>
 
     <div>
-      <%= button_to "Leave Game", root_path, method: :get, class: 'button button--exit' %>
+      <%= button_to "Leave Game", root_path, method: :get, class: 'button button--full button--exit' %>
     </div>
 
     <div>
