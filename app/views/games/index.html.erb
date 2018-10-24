@@ -1,22 +1,32 @@
 <div class="menu">
-<h1>
-  Active Games
-</h1>
+  <h1>
+    Rubies on Rails
+  </h1>
 
- <%= link_to "Rules" %>
+  <div class="menu__rules">
+    <%= link_to "?", @game, class: 'menu__link' %>
+  </div>
 
-<div>
-<ul class="games-list">
-  <% @games.each do |game| %>
-    <li>
-      <%= game.name%> |
-      <%= link_to "Join", game_path(game.id)%> |
-      <%= link_to "Reset" ,game, method: :patch, data: { confirm: 'Are you sure you want to reset this game?' } %> |
-      <%= link_to 'Delete',game, method: :delete, data: { confirm: 'Are you sure you want to remove this game?' } %>
-    </li>
-  <% end %>
-</ul>
-</div>
+  <ul class="games-list">
+    <% @games.each do |game| %>
+      <li class="games-list__item">
+        <span>
+          <%= game.name %>
+        </span>
 
-<%= button_to "New Game", new_game_path, method: :get %>
+        <span>
+          <% users = User.where(game_id: game.id) %>
+          <%= "#{users.size} / 4 players" %>
+        </span>
+
+        <div class="games-list__links">
+          <%= link_to "Join", game_path(game.id), class: 'button button--small' %>
+          <%= link_to "Reset" ,game, method: :patch, data: { confirm: 'Are you sure you want to reset this game?' }, class: 'button button--reset button--small' %>
+          <%= link_to 'Delete',game, method: :delete, data: { confirm: 'Are you sure you want to remove this game?' }, class: 'button button--exit button--small' %>
+        </div>
+      </li>
+    <% end %>
+  </ul>
+
+  <%= button_to "New Game", new_game_path, method: :get, class: 'button' %>
 </div>

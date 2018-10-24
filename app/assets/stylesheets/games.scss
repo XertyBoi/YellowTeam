@@ -1,3 +1,7 @@
+html {
+  background-color: #e8e8e8;
+}
+
 body {
   font-family: Futura,"Trebuchet MS",Arial,sans-serif
 }
@@ -15,16 +19,62 @@ h3 {
   margin: 0 0 1em 0;
 }
 
-.menu{
-
+.menu {
+  align-items: center;
   display: flex;
   flex-direction: column;
-  align-items: center;
   justify-content: center;
+  position: relative;
+
+  &__rules {
+    position: absolute;
+    right: 0;
+    top: 0;
+  }
+
+  &__link {
+    border: 1px solid #000000;
+    display: block;
+    padding: 1.5em 2em;
+  }
 }
 
-.games-list{
+.games-list {
+  border: 1px solid #000000;
+  height: 300px;
+  list-style: none;
+  margin: 1em 0;
+  overflow-y: scroll;
+  padding: 0;
+  width: 30em;
 
+  &__item {
+    border-bottom: 1px solid #000000;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 1em 0.5em;
+  }
+
+  &__links {
+    display: flex;
+    flex-direction: row;
+  }
+}
+
+.new-game {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  &__title {
+    margin-bottom: 1em;
+  }
+
+  input {
+    margin-bottom: 3em;
+  }
 }
 
 .column-wrapper {
@@ -47,7 +97,7 @@ h3 {
 }
 
 .button {
-  background-color: #008000;
+  background-color: #418A47;
   border: none;
   color: #FFFFFF;
   display: flex;
@@ -58,17 +108,34 @@ h3 {
   width: 15em;
 
   &:hover {
-    background-color: darken(#008000, 5%);
+    background-color: darken(#418A47, 5%);
     cursor: pointer;
   }
 
-  &--exit {
-    background-color: red;
+  &--reset {
+    background-color: #FF8F00;
 
     &:hover {
-      background-color: darken(red, 5%);
+      background-color: darken(#FF8F00, 5%);
       cursor: pointer;
     }
+  }
+
+  &--exit {
+    background-color: #FF1D47;
+
+    &:hover {
+      background-color: darken(#FF1D47, 5%);
+      cursor: pointer;
+    }
+  }
+
+  &--small {
+    font-size: 0.5em;
+    margin-right: 0.5em;
+    padding: 1em 2em;
+    text-decoration: none;
+    width: auto;
   }
 }
 
@@ -239,6 +306,8 @@ h3 {
 }
 
 .game-log {
-  border: 1px solid green;
+  background-color: #FFFFFF;
+  border: 1px solid #000000;
   height: 20em;
+  padding: 0.25em;
 }
