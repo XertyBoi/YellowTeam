@@ -11,7 +11,7 @@ RSpec.describe Tile::LowerLeftTile, type: :model do
     expect(@tile.class).to eq(Tile::LowerLeftTile)
   end
 
-  it "tests position is correct for the first lower right tile" do
+  it "tests position is correct for the first lower left tile" do
   	@tile = Tile::LowerLeftTile.new(0 , @board, 1)
     expect(@tile.id).to eq(0)
   end

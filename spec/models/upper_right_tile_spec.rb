@@ -11,14 +11,14 @@ RSpec.describe Tile::UpperRightTile, type: :model do
     expect(@tile.class).to eq(Tile::UpperRightTile)
   end
 
-  it "tests we land on the correct first upper right tile" do
+  it "tests position is correct for the first upper right tile" do
   	@tile = Tile::LowerRightTile.new(21 , 1, @board )
     expect(@tile.id).to eq(21)
   end
 
   it "tests if upper right tile has a link" do
   	@tile = Tile::LowerLeftTile.new(11 , 1, @board )
-  	expect(@tile.link.nil?).to be false
+  	expect(@tile.link).to eql 1
   end
 
  end 
