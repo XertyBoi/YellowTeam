@@ -64,6 +64,7 @@ RSpec.describe GamesController, type: :controller do
   end
 
   it "expects update roll to render template show " do
+    skip
     @game = Game.create(id: 2, name: "test_game",turn_id: 0, log: "test£test2")
     @tile1 = Tiles.create(id: 1, tile_type: "none", link_id: 2)
     @tile2 = Tiles.create(id: 2, tile_type: "none", link_id: 0)
@@ -94,11 +95,5 @@ RSpec.describe GamesController, type: :controller do
     @tile1.destroy
     @tile2.destroy
   end
-
-
-  # it "" do
-  #   allow(obj).to receive(:message).with('an argument') { ... }
-  #   obj.stub(:message).with('an argument') { ... }
-  # end
 
 end
