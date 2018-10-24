@@ -82,7 +82,7 @@ RSpec.describe GamesController, type: :controller do
     get :show, params: { id: 2 }
     @current_player = @user
 
-   	post :update_roll, params: { game_id: 2 }
+   	#ßpost :update_roll, params: { game_id: 2 }
     puts @user.nickname
     puts @board.get_tile_set.first.link
 
