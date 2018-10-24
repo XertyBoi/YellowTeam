@@ -1,5 +1,5 @@
 class Tile
-  attr_reader :id, :type, :link
+  attr_reader :id, :type, :link, :board
 
   def initialize(id, board, link_id)
     @id = id
