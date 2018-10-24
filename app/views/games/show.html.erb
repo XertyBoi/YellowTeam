@@ -47,7 +47,11 @@
     </div>
 
     <div>
-      <%= button_to "Roll dice", game_update_roll_path(@game), method: :get, class: 'button' %>
+      <% if @current_player.uuid.to_i == @user_id.to_i %>
+        <%= button_to "Roll dice", game_update_roll_path(@game), method: :get, class: 'button button--dice' %>
+      <% else %>
+        <%= button_to "Not your turn", game_path(@game), :disabled => true ,class: 'button button--disabled'%>
+      <% end %>
     </div>
   </div>
 </div>
