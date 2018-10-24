@@ -12,12 +12,12 @@ RSpec.describe Tile::UpperLeftTile, type: :model do
   end
 
   it "tests position is correct for the first upper left tile" do
-  	@tile = Tile::LowerLeftTile.new(21 , @board, 1 )
+  	@tile = Tile::UpperLeftTile.new(21 , @board, 1 )
     expect(@tile.id).to eq(21)
   end
 
   it "tests if lower left tile has a link" do
-  	@tile = Tile::LowerLeftTile.new(41 , @board, 1 )
+  	@tile = Tile::UpperLeftTile.new(41 , @board, 1 )
   	expect(@tile.link).to eql 1
   end
 

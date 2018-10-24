@@ -87,7 +87,6 @@ RSpec.describe GamesController, type: :controller do
     puts @board.get_tile_set.first.link
 
 
-
     expect(response).to render_template("show")
 
     @game.destroy
