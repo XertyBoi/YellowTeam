@@ -89,6 +89,7 @@ h3 {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  max-width: 400px;
   padding: 0 1em;
 
   @media (max-width: 925px) {
