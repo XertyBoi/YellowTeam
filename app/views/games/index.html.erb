@@ -1,12 +1,11 @@
 <div class="menu">
-
-
   <h1>
-    Rubies on Rails
   </h1>
 
+  <image class="logo" src="<%= image_path 'logo.png'%>"></image>
+
   <div class="menu__rules">
-    <%= link_to "?", '/rules', class: 'menu__link' %>
+    <%= link_to "How to Play", '/rules', class: 'menu__link' %>
   </div>
 
   <ul class="games-list">
@@ -30,9 +29,9 @@
     <% end %>
   </ul>
 
-  <%= button_to "New Game", new_game_path, method: :get, class: 'button' %>
+  <%= button_to "New Game", new_game_path, method: :get, class: 'button button--menu' %>
 </div>
 
-<embed src="<%= audio_path 'lobby-music.mp3'%>" autostart="true" loop="true"
+  <embed src="<%= audio_path 'lobby-music_2.mp3'%>" autostart loop
     width="2" height="0">
-</embed>
+  </embed>

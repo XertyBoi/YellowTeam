@@ -2,7 +2,16 @@
 
 <div class="game-log">
   <% @game.log.split('£').each do |line| %>
-    <span><%= line %></span>
+    <% if (User.exists?(uuid: cookies[:user_id]))%>
+      <% @user = User.find_by uuid: @user_id %>
+      <% if (line.include? @user.nickname) %>
+        <span class='highlight'><%= line %></span>
+      <% else %>
+        <span><%= line %></span>
+      <% end %>
+    <% else %>
+      <span><%= line %></span>
+    <% end %>
     <br>
   <% end %>
 </div>
